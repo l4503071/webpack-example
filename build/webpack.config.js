@@ -7,13 +7,17 @@ const r = (path) => resolve(__dirname, path)
 
 module.exports = {
   entry: {
-    index: r('./src/index.js')
+    index: r('../src/index.js')
   },
   output: {
-    path: r('./dist/'),
+    path: r('../dist/'),
     filename: '[name].[hash].js'
   },
   devtool: '#cheap-module-eval-source-map',
+  devServer:{
+    port: 3000,
+    open: true
+  },
   module: {
     rules:[
       {
@@ -24,9 +28,9 @@ module.exports = {
     ]
   },
   plugins: [
-    new cleanWebpackPlugin(r('./dist/')),
+    new cleanWebpackPlugin(r('../dist/')),
     new htmlWebpackPlugin({
-      template: r('./src/index.html')
+      template: r('../src/index.html')
     })
   ]
 }
