@@ -4,7 +4,7 @@ const cleanWebpackPlugin = require('clean-webpack-plugin')
 const htmlWebpackPlugin = require('html-webpack-plugin')
 
 const r = (path) => resolve(__dirname, path)
-console.log(r('./'))
+
 module.exports = {
   entry: {
     index: r('./src/index.js')
