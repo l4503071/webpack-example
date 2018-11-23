@@ -9,17 +9,24 @@ module.exports = {
   entry: {
     index: r('./src/index.js')
   },
-  output:{
-    path:r('./dist/'),
-    filename:'[name].js'
+  output: {
+    path: r('./dist/'),
+    filename: '[name].[hash].js'
   },
-  module:{
-
+  devtool: '#cheap-module-eval-source-map',
+  module: {
+    rules:[
+      {
+        test:/.(js|jsx)$/,
+        use:['babel-loader'],
+        exclude:/node_modules/
+      }
+    ]
   },
-  plugins:[
+  plugins: [
     new cleanWebpackPlugin(r('./dist/')),
     new htmlWebpackPlugin({
-      template:r('./src/index.html')
+      template: r('./src/index.html')
     })
   ]
 }
