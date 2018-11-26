@@ -8,13 +8,13 @@ const fs = require('fs');
 const r = (path) => resolve(__dirname, path)
 
 const app = new Koa();
-const template = fs.readFileSync(r('../dist/index.html'),'utf8');
+const template = fs.readFileSync(r('../dist/template.html'),'utf8');
 
 app.use(static(r('../dist')))
 
 app.use(ctx => {
   const res = ReactSSR.renderToString(serverjs)
-  ctx.body = template.replace('<app></app>',res);
+  ctx.body = template.replace('<!-- app -->',res);
 });
 
 app.listen(3000,()=>{

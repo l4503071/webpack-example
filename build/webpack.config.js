@@ -15,7 +15,8 @@ module.exports = {
   devtool: '#cheap-module-eval-source-map',
   devServer:{
     port: 3000,
-    open: true
+    open: true,
+    hot:true
   },
   module: {
     rules:[
@@ -28,7 +29,9 @@ module.exports = {
   },
   plugins: [
     new htmlWebpackPlugin({
-      template: r('../src/index.html')
-    })
+      template: r('../src/template.html'),
+      filename: 'template.html'
+    }),
+    new webpack.HotModuleReplacementPlugin()
   ]
 }
