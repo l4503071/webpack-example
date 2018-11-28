@@ -4,34 +4,42 @@ const htmlWebpackPlugin = require('html-webpack-plugin')
 
 const r = (path) => resolve(__dirname, path)
 
-module.exports = {
-  entry: {
-    index: r('../src/index.js')
-  },
-  output: {
-    path: r('../dist/'),
-    filename: '[name].[hash].js'
-  },
-  devtool: '#cheap-module-eval-source-map',
-  devServer:{
-    port: 3000,
-    open: true,
-    hot:true
-  },
-  module: {
-    rules:[
-      {
-        test:/.(js|jsx)$/,
-        use:['babel-loader'],
-        exclude:/node_modules/
-      }
+module.exports = (env, argv) => {
+  const config = {
+    entry: r('../src/index.js'),
+    output: {
+      path: r('../dist/'),
+      filename: '[name].[hash].js'
+    },
+    module: {
+      rules:[
+        {
+          test:/.(js|jsx)$/,
+          use:['babel-loader'],
+          exclude:/node_modules/
+        }
+      ]
+    },
+    plugins: [
+      new htmlWebpackPlugin({
+        template: r('../src/template.html'),
+        filename: 'template.html'
+      }),
+      new webpack.HotModuleReplacementPlugin()
     ]
-  },
-  plugins: [
-    new htmlWebpackPlugin({
-      template: r('../src/template.html'),
-      filename: 'template.html'
-    }),
-    new webpack.HotModuleReplacementPlugin()
-  ]
+  }
+  const idDev = argv.mode === 'development';
+  if(idDev) {
+    config.devServer = {
+      contentBase: r('../dist/'),
+      port: 3000,
+      open: true,
+      hot: true,
+      overlay: {
+        errors: true
+      }
+    };
+    config.devtool = '#cheap-module-eval-source-map';
+  }
+  return config;
 }

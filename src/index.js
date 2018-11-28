@@ -3,4 +3,8 @@ import ReactDOM from 'react-dom'
 
 import App from './index.jsx'
 
-ReactDOM.hydrate(<App/>, document.getElementById('app'))
+const render = (Component) => {
+  return ReactDOM.render(<Component/>, document.getElementById('app'))
+}
+
+render(App);
