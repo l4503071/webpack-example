@@ -29,7 +29,7 @@ export default hot(module)(class App extends Component {
     const { add } = this;
     return (
       <div>
-        <h1>h1</h1>
+        <h1>h12</h1>
         <h2>
           {
             msg

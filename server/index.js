@@ -1,9 +1,11 @@
 const Koa = require('koa');
 const static = require('koa-static');
+const proxy = require('koa-server-http-proxy');
 const serverjs = require('../dist/server.js').default;
 const ReactSSR = require('react-dom/server');
 const { resolve } = require('path')
 const fs = require('fs');
+const serverDev = require('./utils/server-dev.js')
 
 const puppeteer = require('puppeteer');
 
@@ -12,6 +14,7 @@ const r = (path) => resolve(__dirname, path)
 const app = new Koa();
 const template = fs.readFileSync(r('../dist/template.html'),'utf8');
 
+// 截图测试
 app.use(async (ctx, next)=>{
   if (ctx.request.url === '/img') {
     const browser = await puppeteer.launch({
@@ -40,12 +43,19 @@ app.use(async (ctx, next)=>{
   await next();
 })
 
-app.use(static(r('../dist')))
 
-app.use(ctx => {
-  const res = ReactSSR.renderToString(serverjs)
-  ctx.body = template.replace('<!-- app -->',res);
-});
+const isDev = process.env.NODE_ENV === 'development'
+if (isDev) {
+  app.use(proxy('/*.*','http://localhost:3000'));
+  serverDev(app)
+} else {
+  app.use(static(r('../dist')))
+  app.use(ctx => {
+    const res = ReactSSR.renderToString(serverjs)
+    ctx.body = template.replace('<!-- app -->',res);
+  });
+} 
+
 
 app.listen(3001,()=>{
   console.log('server is listening 3001.')
