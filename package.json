@@ -10,7 +10,14 @@
     "clear": "rimraf dist",
     "build:client": "webpack --mode=development --config build/webpack.config.js",
     "build:server": "webpack --mode=development --config build/webpack.ssr.config.js",
-    "build": "npm run clear && npm run build:client && npm run build:server"
+    "build": "npm run clear && npm run build:client && npm run build:server",
+    "lint": "eslint --ext .js --ext .jsx --config src/.eslintrc src/"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "npm run lint",
+      "pre-push": "npm run lint"
+    }
   },
   "dependencies": {
     "axios": "^0.18.0",
