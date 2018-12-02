@@ -14,6 +14,11 @@ module.exports = (env, argv) => {
     module: {
       rules:[
         {
+          enforce: 'pre',
+          test:/.(js|jsx)$/,
+          use:['eslint-loader'],
+          exclude:/node_modules/
+        },{
           test:/.(js|jsx)$/,
           use:['babel-loader'],
           exclude:/node_modules/

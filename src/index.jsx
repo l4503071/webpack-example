@@ -6,24 +6,28 @@ export default hot(module)(class App extends Component {
     super(props);
     this.state = {
       msg: '123431011',
-      count: 1
+      count: 1,
     }
   }
+
   componentDidMount() {
     this.change('00125666')
   }
+
   change(msg) {
     this.setState({
-      msg
+      msg,
     });
   }
-  add () {
-    this.setState((state)=>{
+
+  add() {
+    this.setState((state) => { // eslint-disable-line
       return {
-        count: state.count + 1
+        count: state.count + 1,
       }
     });
   }
+
   render() {
     const { msg, count } = this.state;
     const { add } = this;
@@ -40,7 +44,7 @@ export default hot(module)(class App extends Component {
             count
           }
         </h4>
-        <button onClick={add.bind(this)}>add</button>
+        <button type="button" onClick={add.bind(this)}>add</button>
       </div>
     )
   }
