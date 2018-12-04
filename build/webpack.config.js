@@ -11,6 +11,9 @@ module.exports = (env, argv) => {
       path: r('../dist/'),
       filename: '[name].[hash].js'
     },
+    resolve: {
+      extensions: ['.js', '.jsx'],
+    },
     module: {
       rules:[
         {

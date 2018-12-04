@@ -1,11 +1,11 @@
 const Koa = require('koa');
 const static = require('koa-static');
 const proxy = require('koa-server-http-proxy');
-const serverjs = require('../dist/server.js').default;
+const serverjs = require('../dist/server').default;
 const ReactSSR = require('react-dom/server');
 const { resolve } = require('path')
 const fs = require('fs');
-const serverDev = require('./utils/server-dev.js')
+const serverDev = require('./utils/server-dev')
 
 const puppeteer = require('puppeteer');
 
@@ -38,7 +38,7 @@ app.use(async (ctx, next)=>{
     console.log('done...')
     ctx.body = `width: ${dimensions.width}\nheight: ${dimensions.height}\ndeviceScaleFactor: ${dimensions.deviceScaleFactor}\n
                `;
-    return 
+    return
   }
   await next();
 })
@@ -54,7 +54,7 @@ if (isDev) {
     const res = ReactSSR.renderToString(serverjs)
     ctx.body = template.replace('<!-- app -->',res);
   });
-} 
+}
 
 
 app.listen(3001,()=>{
