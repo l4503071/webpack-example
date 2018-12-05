@@ -39,6 +39,13 @@ module.exports = (env, argv) => {
   const idDev = argv.mode === 'development';
   if(idDev) {
     config.devServer = {
+      historyApiFallback:{
+        rewrites: [
+          {
+            from: /^\/$/, to: '/template.html'
+          }
+        ]
+      },
       contentBase: r('../dist/'),
       port: 3000,
       open: true,

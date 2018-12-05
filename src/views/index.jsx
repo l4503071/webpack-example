@@ -1,23 +1,18 @@
 import React, { Component } from 'react';
 import { hot } from 'react-hot-loader';
+import { Link } from 'react-router-dom';
+import Routes from '../config/router';
 
 export default hot(module)(class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      msg: '123431011',
       count: 1,
     };
   }
 
   componentDidMount() {
-    this.change('00125666');
-  }
 
-  change(msg) {
-    this.setState({
-      msg,
-    });
   }
 
   add() {
@@ -29,22 +24,18 @@ export default hot(module)(class App extends Component {
   }
 
   render() {
-    const { msg, count } = this.state;
+    const { count } = this.state;
     const { add } = this;
     return (
       <div>
-        <h1>h12</h1>
-        <h2>
-          {
-            msg
-          }
-        </h2>
         <h4>
           {
             count
           }
         </h4>
         <button type="button" onClick={add.bind(this)}>add</button>
+        <Link to="/">切换至home</Link>
+        <Routes />
       </div>
     );
   }
