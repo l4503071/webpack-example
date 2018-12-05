@@ -11,6 +11,8 @@
   },
   "extends": "airbnb",
   "rules": {
-    "semi": [0]
+    "semi": [2],
+    "quotes": [2],
+    "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }]
   }
 }

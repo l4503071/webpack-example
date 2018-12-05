@@ -1,5 +1,5 @@
-import React, { Component } from 'react'
-import { hot } from 'react-hot-loader'
+import React, { Component } from 'react';
+import { hot } from 'react-hot-loader';
 
 export default hot(module)(class App extends Component {
   constructor(props) {
@@ -7,11 +7,11 @@ export default hot(module)(class App extends Component {
     this.state = {
       msg: '123431011',
       count: 1,
-    }
+    };
   }
 
   componentDidMount() {
-    this.change('00125666')
+    this.change('00125666');
   }
 
   change(msg) {
@@ -24,7 +24,7 @@ export default hot(module)(class App extends Component {
     this.setState((state) => { // eslint-disable-line
       return {
         count: state.count + 1,
-      }
+      };
     });
   }
 
@@ -46,6 +46,6 @@ export default hot(module)(class App extends Component {
         </h4>
         <button type="button" onClick={add.bind(this)}>add</button>
       </div>
-    )
+    );
   }
-})
+});
