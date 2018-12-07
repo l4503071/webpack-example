@@ -33,7 +33,7 @@ class Home extends React.Component {
     );
   }
 }
-Home.propTypes = {
-  appState: PropTypes.instanceOf(AppState),
+Home.wrappedComponent.propTypes = {
+  appState: PropTypes.instanceOf(AppState).isRequired,
 };
 export default Home;

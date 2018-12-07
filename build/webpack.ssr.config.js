@@ -8,6 +8,9 @@ module.exports = {
   entry: {
     index: r('../src/index-ssr.js')
   },
+  resolve: {
+    extensions: ['.js', '.jsx'],
+  },
   output: {
     path: r('../dist/'),
     filename: 'server.js',
